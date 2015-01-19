@@ -1,0 +1,69 @@
+application: band9u
+version: 1
+runtime: python27
+api_version: 1
+#threadsafe: yes
+threadsafe: no
+default_expiration: "6h"
+
+libraries:
+- name: django
+  version: 1.5
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(.*/)?.*\.bak$
+- ^(.*/)?.*\.less$
+- ^(.*/img/src_sprite/.*)
+- ^(.*/img/time_recorder/src/.*)
+- ^(\..*)
+- ^(/)?bin/.*
+- ^(/)?etc/.*
+- ^(/)?tools/.*
+- ^(/)?fasti/alt/.*
+- ^(/)?fasti/.*/tests/.*
+- ^(/)?apps/.*/tests/.*
+- ^(/)?models/tests/.*
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: 'settings'
+
+handlers:
+
+# static files
+- url: /favicon\.ico
+  static_files: static/favicon/favicon.ico
+  upload: static/favicon/favicon\.ico
+  secure: always
+
+- url: /images
+  static_dir: media/images
+  secure: always
+
+- url: /fonts
+  static_dir: media/fonts
+  secure: always
+
+- url: /css
+  static_dir: media/css
+  secure: always
+
+- url: /js
+  static_dir: media/js
+  secure: always
+
+- url: /html
+  static_dir: media/html
+  secure: always
+
+- url: /.*
+  script: main.app
+  secure: always

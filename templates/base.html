@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/main.css"/>
+    {% block extra_header %}
+    {% endblock %}
+    <title>{% block headertitle %}{% endblock %}</title>
+</head>
+<body class="{% block body-class %}{% endblock %}">
+<div id="contents">
+    {% block main %}{% endblock %}{% block page_scripts %}{% endblock %}
+    <div class="clearfix"></div>
+    <address><small class="pull-right">mailto:&nbsp;<a href="mailto:{{CONTACT_EMAIL}}?subject=お問い合わせ&amp;">{{CONTACT_EMAIL}}</a></small></address>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+/* body{background:#C46D3B;}
+ * body{background:#9C9985;}
+ * body{background:#FAF9FB;}
+ * body{background:#E3CBAC;}
+ * body{background:#788880;}
+ * body{background:#324654;}
+ * body{background:#5ED0BD;} */
+body{background-image:url("../images/bgw.gif"); color:#555;font-family: Georgia, serif;}
+.east{background-image:url("../images/bge.gif");}
+.west{background-image:url("../images/bghome.gif");}
+/* h1{color:#FAFAFA;line-height:40px;text-shadow:#552918 2px 2px 4px;font-size:60px; } */
+h1{color:#FAFAFA;line-height:50px;text-shadow:black 2px 2px 4px;font-size:60px;}
+#title{margin:25px 0px 15px;}
+#navbar-inner{margin:20px 90px;}
+/* #booking{float:left; width:430px;} */
+#booking table{width:100%; margin-top:20px;}
+#booking table .date{width:69px;}
+#booking table .time{width:34px;}
+#booking table .cancel{width:44px;}
+#booking table .name{padding-left:15px;}
+#booking table .center{text-align:center;}
+#booking-check-main{width:400px;}
+#bforms{float:right;}
+.clear{clear:both;}
+/* .table tbody tr:hover td, .table tbody tr:hover th{background-color:#324654;} */
+.table tbody tr:hover td, .table tbody tr:hover th{background-color:#637A9F;}
+.table{font-size:11px; line-height:13px;}
+.table td{font-size:12px; line-height:13px;}
+.table th{font-size:12px; line-height:13px;}
+.table tr{border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px;}
+.contents{width:800px; margin:0 auto;}
+/*.contents{background-image:url("../images/rooftop.gif");  background-repeat:no-repeat; }*/
+.navbar-inner{background:#2C2C00;}
+.control-group{margin-bottom:0px;}
+.form-horizontal .control-group{margin-bottom:8px;}
+small{font-size:11px;}
+.help-block{color:#555;}
+#twin-table .well.left{margin:0 20px 0 40px;}
+#twin-table .well.right{margin:0 40px 0 20px;}
+.clearfix:after{content: ".";display:block;clear:both;height:0;visibility:hidden;}
+.clearfix{min-height: 1px;}
+* html .clearfix{height:1px;/*¥*//*/height:auto;overflow:hidden;/**/}
+.reveal{margin-top:90px; color:#757575;}
+/* .error input, .error select,.error textarea, .error label{color:#b94a48;  border-color:#b94a48;} */
+
+/* Primary Color: */
+/* 00A287 */
+/* 1E796A */
+/* 006957 */
+/* 34D0B6 */
+/* 5ED0BD */
+
+/* Secondary Color A: */
+/* FFA200 */
+/* BF8B30 */
+/* A66A00 */
+/* FFBA40 */
+/* FFCC73 */
+
+/* Secondary Color B: */
+/* F5001D */
+/* B72E3E */
+/* 9F0013 */
+/* FA3E54 */
+/* FA7080 */

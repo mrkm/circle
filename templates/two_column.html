@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block main %}
+    <div id="left" class="clearfix">
+        <div id="title">
+            <h1>9u band circle</h1>
+            <span>Room reservation system?</span>
+        </div>
+        {% block left %}{% endblock %}
+    </div>
+    <div id="right" class="clearfix">
+        {% block right %}{% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "two_column.html" %}
+{% block left %}
+    <div id="booking-form">
+        <form action="/delete/{{booking.key.id}}" method="POST">
+            <div class="form-group">
+                <label for="id_pswd">Password</label>
+                <input type="password" class="form-control" name="pswd" id="id_pswd" />
+            </div>
+            <input type="hidden" name="status" value="0" id="id_status" />
+            <input type="hidden" name="place" value="0" id="id_status" />
+            <input id="booking-submit" type="submit" class="btn btn-default" value="Submit"/>
+        </form>
+    </div>
+{% endblock %}
+
+{% block right %}
+    <div>
+        <span>箱崎キャンパス</span>
+        <table class="table table-striped"><tbody><tr><th class="date">Date</th><th class="time">Time</th><th class="name">Name</th></tr>
+        <tr>
+            <td>{{booking.start.month}}.{{booking.start.day}}, {{booking.start.year}}</td>
+            <td class="center">{{booking.start.time.hour}}-{{booking.end.time.hour}}</td>
+            <td class="name">{{booking.name}}</td>
+        </tr>
+        </table>
+    </div>
+{% endblock %}

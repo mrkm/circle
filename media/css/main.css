@@ -1,0 +1,32 @@
+/* Primary Color #367DA2; (54, 125, 162) */
+body{color:#666; background-image:url("/images/flower.png"); background-repeat:no-repeat;
+     background-attachment:fixed; font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+label{margin-bottom: 1px;font-weight:normal;}
+h1{line-height:1.1;font-size:28px;}
+/*#title{font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;}*/
+#title{font:14px/1.5 Lato;}
+#title h1{margin:0 0 10px;}
+#booking-form{margin:30px 0 0;}
+#contents{width:860px; margin:30px auto 0;}
+#left{width:360px;float:left;position:fixed;}
+#right{width:500px;float:right;}
+#booking-submit{margin-top:15px;padding:5px 10px;color:#444;}
+.form-group{margin-bottom:3px;}
+.form-group label{width:70px;height:24px;margin-top:3px;padding-top: 1px;}
+.form-group input,.form-group select{width:230px;height:29px;display:inline;}
+.form-group input{padding:6px;}
+.table tbody tr:hover td, .table tbody tr:hover th{background-color:#F3F3F3;}
+.table{font-size:11px; line-height:13px;}
+.table td{font-size:12px; line-height:13px;}
+.table th{font-size:12px; line-height:13px;}
+.table tr{border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px;}
+.table .date,.table .time{width:90px;}
+.table .cancel{width:35px;}
+.table .glyphicon{padding: 3px 0 0;}
+
+.alert-success{background-color: #F2FFED;color: #557A56;border-color: #d6e9c6;}
+
+.clear{clear:both;}
+.clearfix:after{content: ".";display:block;clear:both;height:0;visibility:hidden;}
+.clearfix{min-height: 1px;}
+* html .clearfix{height:1px;/*¥*//*/height:auto;overflow:hidden;/**/}
