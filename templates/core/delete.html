@@ -15,7 +15,11 @@
 
 {% block right %}
     <div>
+        {% if booking.state < 2 %}
         <span>箱崎キャンパス</span>
+        {% else %}
+        <span>伊都キャンパス</span>
+        {% endif %}
         <table class="table table-striped"><tbody><tr><th class="date">Date</th><th class="time">Time</th><th class="name">Name</th></tr>
         <tr>
             <td>{{booking.start.month}}.{{booking.start.day}}, {{booking.start.year}}</td>

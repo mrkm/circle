@@ -11,9 +11,10 @@
 </head>
 <body class="{% block body-class %}{% endblock %}">
 <div id="contents">
-    {% block main %}{% endblock %}{% block page_scripts %}{% endblock %}
-    <div class="clearfix"></div>
-    <address><small class="pull-right">mailto:&nbsp;<a href="mailto:{{CONTACT_EMAIL}}?subject=お問い合わせ&amp;">{{CONTACT_EMAIL}}</a></small></address>
+    <div class="clearfix">
+        {% block main %}{% endblock %}
+    </div>
+    <address><small class="pull-right"><a href="mailto:{{CONTACT_EMAIL}}?subject=お問い合わせ">contact</a></small></address>
 </div>
 </body>
 </html>

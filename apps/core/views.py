@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 # coding: utf-8
 import datetime
+from django.conf import settings
 from django.http import HttpResponseRedirect
-from libs.django_utils.utils import BaseView
+from libs.django_utils.utils import BaseView as DjangoView
 from apps.core.utils import logger
+from apps.booking import const
+from apps.booking.forms import Form
+from apps.booking.managers import BookingManager
 from apps.booking.models import Booking
 
 
@@ -16,12 +20,18 @@ def datetime_options(base_date, num=14):
     return options
 
 
+class BaseView(DjangoView):
+    def render_to_response(self, context):
+        context["CONTACT_EMAIL"] = settings.CONTACT_EMAIL
+        return super(BaseView, self).render_to_response(context)
+
+
 class DeleteView(BaseView):
     template_name = "core/delete.html"
     http_method_names = [u"get", u"post"]
 
     def get(self, request, pk):
-        booking = Booking.get(int(pk))
+        booking = BookingManager.get(int(pk))
         if booking is None:
             return HttpResponseRedirect("/")
         context = {}
@@ -30,7 +40,7 @@ class DeleteView(BaseView):
 
     def post(self, request, pk):
         try:
-            Booking.delete(int(pk))
+            BookingManager.delete(int(pk))
         except:
             pass
         return HttpResponseRedirect("/")
@@ -43,9 +53,8 @@ class TopView(BaseView):
     def _render(self, _context):
         context = {}
         context.update(_context)
-        bookings = Booking.get_all()
-        context["east"] = bookings.get("east")
-        context["west"] = bookings.get("west")
+        context["east"] = BookingManager.fetch_by_state(const.EAST)
+        context["west"] = BookingManager.fetch_by_state(const.WEST)
         context["datetime_options"] = datetime_options(datetime.date.today())
         context["post"] = ""
         return self.render_to_response(context)
@@ -75,19 +84,17 @@ class TopView(BaseView):
         password = cleaned_data.get(u"password")
         start = cleaned_data.get("start")
         end = cleaned_data.get("end")
-        return Booking.create(name, start, end, state)
+        return Booking(name=name, start=start, end=end,
+                       state=state, password=password).put()
 
     def form_clean(self, data):
-        cleaned_data = {}
         errors = []
-        try:
-            Booking.clean(data, cleaned_data, errors)
-        except Exception, e:
-            return None, errors
-        try:
-            Booking.overlap(cleaned_data[u"room"], cleaned_data["start"], cleaned_data["end"])
-        except Exception, e:
-            errors.append(u"overlap")
-            return None, errors
+        form = Form().clean(data)
+        if form.errors:
+            return None, form.errors
 
-        return cleaned_data, errors
+        if not BookingManager.check_overlap(
+            form.cleaned_data[u"room"], form.cleaned_data["start"], form.cleaned_data["end"]):
+            return None, ["overlap"]
+
+        return form.cleaned_data, []
