@@ -31,14 +31,14 @@ class BookingManager(Manager):
     @classmethod
     def check_overlap(cls, state, start, end):
 
-        def _check(booking):
+        def overlap(booking):
             if  start <= booking.start and booking.start < end:
-                return False
+                return True
             if  start < booking.end and booking.end <= end:
-                return False
-            return True
+                return True
+            return False
 
         bookings = cls.fetch_by_state(state)
-        if not all([_check(booking) for booking in bookings]):
+        if any([overlap(booking) for booking in bookings]):
             return False
         return True
