@@ -46,6 +46,17 @@ class DeleteView(BaseView):
         return HttpResponseRedirect("/")
 
 
+class ManageView(BaseView):
+    template_name = "core/top.html"
+    http_method_names = [u"get"]
+
+    def get(self, request):
+        date = datetime.datetime.now()
+        BookingManager.delete_old(datetime.datetime(
+                year=date.year, month=date.month, day=1))
+        return self.render_to_response({})
+
+
 class TopView(BaseView):
     template_name = "core/top.html"
     http_method_names = [u"get", u"post"]
@@ -76,16 +87,12 @@ class TopView(BaseView):
         return HttpResponseRedirect("/")
 
     def create(self, cleaned_data):
-        name = cleaned_data.get(u"name")
-        date_ = cleaned_data.get(u"date")
-        time_ = cleaned_data.get(u"time")
-        length = cleaned_data.get(u"length")
-        state = cleaned_data.get(u"room")
-        password = cleaned_data.get(u"password")
-        start = cleaned_data.get("start")
-        end = cleaned_data.get("end")
-        return Booking(name=name, start=start, end=end,
-                       state=state, password=password).put()
+        return Booking(
+            name=cleaned_data.get(u"name"),
+            start=cleaned_data.get("start"),
+            end=cleaned_data.get("end"),
+            state=cleaned_data.get(u"room"),
+            password=cleaned_data.get(u"password")).put()
 
     def form_clean(self, data):
         errors = []
