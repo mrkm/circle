@@ -5,12 +5,9 @@ import os
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "libs"))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
-DEBUG = True
-#DEBUG = False
+# DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-
-# tells Pinax to use the default theme
-PINAX_THEME = 'default'
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -65,7 +62,6 @@ ADMIN_MEDIA_PREFIX = '/site_media/static/admin/'
 SECRET_KEY = 'u*@1b%2uv_%8yer15i38qxhvrs12z+e#103kx8)-jjq(cs#pm&'
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
