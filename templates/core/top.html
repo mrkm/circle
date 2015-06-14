@@ -4,7 +4,7 @@
         <form action="." method="POST">
             <div class="form-group{% if "name" in errors %} has-error{% endif %}">
                 <label for="id_name">Name</label>
-                <input type="text" class="form-control" name="name" id="id_name" maxlength="30"/>
+                <input type="text" {% if posted %}value="{{posted.name}}"{% endif %}class="form-control" name="name" id="id_name" maxlength="30"/>
                 {{ form.guest }}
             </div>
             <div class="form-group{% if "overlap" in errors %} has-error{% endif %}{% if "date" in errors %} has-error{% endif %}">
@@ -58,18 +58,6 @@
 {% endblock %}
 
 {% block right %}
-    {% if success %}
-        <div class="alert alert-success">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
-            {{success}}
-        </div>
-    {% endif %}
-    {% if info %}
-        <div class="alert alert-info">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
-            {{info}}
-        </div>
-    {% endif %}
     <div>
         <span>箱崎キャンパス</span>
         <table class="table table-striped"><tbody><tr><th class="date">Date</th><th class="time">Time</th><th class="name">Name</th><th class="cancel"></th></tr>
@@ -96,4 +84,19 @@
         {% endfor %}
         </table>
     </div>
+
+    {% if success %}
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready( function() {
+                alert("notice", "{{message}}");
+            });
+        </script>
+    {% endif %}
+    {% if errors %}
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready( function() {
+                alert("alert", "{{message}}");
+            });
+        </script>
+    {% endif %}
 {% endblock %}

@@ -1,4 +1,1 @@
 cron:
-- description: daily summary job
-  url: /manage
-  schedule: 1 of month 00:00

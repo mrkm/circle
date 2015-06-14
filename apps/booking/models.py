@@ -10,4 +10,8 @@ class Booking(ndb.Model):
     password = ndb.StringProperty(indexed=False)
 
     def __unicode__(self):
-        return '%s' % self.name
+        return '%s %s %s-%s' % (
+            self.name,
+            self.start.strftime("%a %-m/%-d"),
+            self.start.strftime("%-H"),
+            self.end.strftime("%-H"))

@@ -2,8 +2,16 @@ application: band9u
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: no
+threadsafe: true
 default_expiration: "6h"
+
+instance_class: F1
+automatic_scaling:
+  min_idle_instances: 1
+  max_idle_instances: 5
+  min_pending_latency: 15s
+  max_pending_latency: automatic
+  max_concurrent_requests: 50
 
 libraries:
 - name: django

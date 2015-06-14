@@ -36,6 +36,16 @@ class BookingManager(Manager):
         return q.fetch(100)
 
     @classmethod
+    def fetch_by_date(cls, state, date):
+        q = cls.kind.query()
+        q = q.filter(cls.kind.state == state)
+        q = q.filter(cls.kind.start >= date)
+        q = q.filter(cls.kind.start < (date + datetime.timedelta(days=1)))
+        q = q.order(cls.kind.start)
+        # TODO: use memcache
+        return q.fetch(100)
+
+    @classmethod
     def delete_old(cls, date):
         q = cls.kind.query()
         q = q.filter(cls.kind.start < date)
@@ -51,7 +61,8 @@ class BookingManager(Manager):
                 return True
             return False
 
-        bookings = cls.fetch_by_state(state)
-        if any([overlap(booking) for booking in bookings]):
-            return False
-        return True
+        bookings = cls.fetch_by_date(state, start)
+        overlaps = [booking for booking in bookings if overlap(booking)]
+        if overlaps:
+            return overlaps[0]
+        return None

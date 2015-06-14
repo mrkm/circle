@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/css/main.css"/>
+    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
     {% block extra_header %}
     {% endblock %}
     <title>{% block headertitle %}{% endblock %}</title>
@@ -16,5 +18,6 @@
     </div>
     <address><small class="pull-right"><a href="mailto:{{CONTACT_EMAIL}}?subject=お問い合わせ">contact</a></small></address>
 </div>
+<div id="alert" class="flash-container" style="display:block;"></div>
 </body>
 </html>

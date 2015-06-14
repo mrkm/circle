@@ -11,12 +11,12 @@ from apps.booking.managers import BookingManager
 from apps.booking.models import Booking
 
 
-def datetime_options(base_date, num=14):
+def datetime_options(base_date, num=30):
     option = u"<option value='%s'>%s</option>"
     options = u""
     for i in xrange(num):
         date_ = (base_date + datetime.timedelta(i))
-        options += option % (date_.isoformat(), date_.strftime("%a %m/%d"))
+        options += option % (date_.isoformat(), date_.strftime("%a %-m/%-d"))
     return options
 
 
@@ -79,12 +79,18 @@ class TopView(BaseView):
 
     def post(self, request):
         context = {}
-        cleaned_data, errors = self.form_clean(request.POST)
+        cleaned_data, errors, message = self.form_clean(request.POST)
         if errors:
             context["errors"] = errors
+            context["message"] = message
+            context["posted"] = cleaned_data
             return self._render(context)
-        booking = self.create(cleaned_data)
-        return HttpResponseRedirect("/")
+        key = self.create(cleaned_data)
+        booking = key.get()
+        context["message"] = u"予約しました。%s" % booking
+        context["success"] = True
+        #return HttpResponseRedirect("/")
+        return self._render(context)
 
     def create(self, cleaned_data):
         return Booking(
@@ -98,10 +104,14 @@ class TopView(BaseView):
         errors = []
         form = Form().clean(data)
         if form.errors:
-            return None, form.errors
+            return (form.cleaned_data, form.errors, form.message)
 
-        if not BookingManager.check_overlap(
-            form.cleaned_data[u"room"], form.cleaned_data["start"], form.cleaned_data["end"]):
-            return None, ["overlap"]
+        overlap = BookingManager.check_overlap(
+            form.cleaned_data[u"room"],
+            form.cleaned_data["start"],
+            form.cleaned_data["end"])
+        if overlap:
+            return (form.cleaned_data,
+                    ["overlap"], u"別な予約と重なっています。 %s" % overlap)
 
-        return form.cleaned_data, []
+        return (form.cleaned_data, [], "")
