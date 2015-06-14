@@ -11,10 +11,10 @@ WEST_CANCELED = "WEST_CANCELED"
 AVAILABLE_EAST = {
     0: (datetime.time(17), datetime.time(21)),
     1: (datetime.time(17), datetime.time(21)),
-    2: (datetime.time(0), datetime.time(0)),
+    2: (datetime.time(17), datetime.time(21)),
     3: (datetime.time(17), datetime.time(21)),
     4: (datetime.time(17), datetime.time(21)),
-    5: (datetime.time(0), datetime.time(0)),
+    5: (datetime.time(9), datetime.time(21)),
     6: (datetime.time(9), datetime.time(21)),
     }
 
